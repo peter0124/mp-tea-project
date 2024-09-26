@@ -1,4 +1,21 @@
 
+SECTION .text
+
+global start
+
+start:
+	mov ebp, esp
+	cmp dword [ebp], 4		; checking the number of arguements passed to the application
+	je args_correct
+	cmp dword [ebp], 2
+	je help_func
+
+invalid:				; executed if invalid arguements are passed to the application
+	push dword [inv_args_len]	; length of data to print
+	push inv_args			; base address of string to print
+	call print
+	add esp, 8
+	call exit
 
 _countFileChars:
     push r10
